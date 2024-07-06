@@ -13,8 +13,7 @@ class Place(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id', ondelete='CASCADE'),
                      nullable=False)
     name = Column(String(128), nullable=False)
-    description = Column(String(1024), nullable=False, server_default='',
-                         default='')
+    description = Column(String(1024), nullable=True, server_default=None)
     number_rooms = Column(Integer, nullable=False, server_default="0")
     number_bathrooms = Column(Integer, nullable=False, server_default="0")
     max_guest = Column(Integer, nullable=False, server_default="0")
