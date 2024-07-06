@@ -98,8 +98,8 @@ class DBStorage:
         if obj is not None:
             obj_cls = None
             for key, value in classes.items():
-                if key == obj.__class__.__name__
-                obj_cls = classes[key]
+                if key == obj.__class__.__name__:
+                    obj_cls = classes[key]
             # query to get the object to be deleted
             query = self.__session.query(obj_cls).filter(obj_cls.id == obj.id)
             # delete
