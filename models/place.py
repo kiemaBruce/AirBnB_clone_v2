@@ -18,8 +18,8 @@ class Place(BaseModel, Base):
     number_bathrooms = Column(Integer, nullable=False, server_default="0")
     max_guest = Column(Integer, nullable=False, server_default="0")
     price_by_night = Column(Integer, nullable=False, server_default="0")
-    latitude = Column(Float, nullable=False, default="NULL")
-    longitude = Column(Float, nullable=False, default="NULL")
+    latitude = Column(Float, nullable=False, server_default="NULL")
+    longitude = Column(Float, nullable=False, server_default="NULL")
     user = relationship("User", back_populates="places")
     cities = relationship("City", back_populates="places")
     amenity_ids = []
