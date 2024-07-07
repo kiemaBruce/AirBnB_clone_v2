@@ -118,6 +118,7 @@ class DBStorage:
         from models.city import City
         from models.place import Place
         from models.review import Review
+        from models.place import association_table
 
         """ Logging
         import logging
