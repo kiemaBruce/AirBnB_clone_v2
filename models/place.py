@@ -1,8 +1,16 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, Float, String, ForeignKey
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
+
+
+association_table = Table('place_amenity', Base.metadata,
+                          Column('place_id', String(60),
+                                 ForeignKey('places.id')),
+                          Column('amenity_id', String(60),
+                                 ForeignKey('amenities.id'))
+                          )
 
 
 class Place(BaseModel, Base):
@@ -24,6 +32,9 @@ class Place(BaseModel, Base):
     cities = relationship("City", back_populates="places")
     reviews = relationship("Review", back_populates="place",
                            cascade="all, delete-orphan")
+    amenities = relationship("Amenity", secondary="place_amenity",
+                             viewonly=False,
+                             back_populates="place_amenities")
     amenity_ids = []
 
     @property
@@ -37,3 +48,29 @@ class Place(BaseModel, Base):
             if value.place_id == self.id:
                 my_reviews.append(value)
         return my_reviews
+
+    @property
+    def amenities(self):
+        """Returns a list of Amenity instances based on the attribute
+        amenity_ids that contains all Amenity.id linked to the place"""
+        from models.amenity import Amenity
+        from models.__init__ import storage
+        amenities_dict = storage.all(Amenity)
+        amenity_instaces = []
+        for key, value in amenities_dict.items():
+            if value.id in amenity_ids:
+                amenity_instances.append(value)
+        return amenity_instances
+
+    @amenities.setter
+    def amenities(self, value):
+        """Inserts Amenity.id into amenity_ids class attribute
+
+        Arguments:
+            value (Amenity): the Amenity object whose id is to be added to
+                         amenity_ids. If it is not an Amenity object then the
+                         function returns without doing nothing.
+        """
+        from models.amenity import Amenity
+        if (type(value) is Amenity):
+            self.amenity_ids.append(value.id)
