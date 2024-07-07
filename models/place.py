@@ -33,8 +33,7 @@ class Place(BaseModel, Base):
     reviews = relationship("Review", back_populates="place",
                            cascade="all, delete-orphan")
     amenities = relationship("Amenity", secondary="place_amenity",
-                             viewonly=False,
-                             back_populates="place_amenities")
+                             viewonly=False)
     amenity_ids = []
 
     @property
@@ -56,9 +55,9 @@ class Place(BaseModel, Base):
         from models.amenity import Amenity
         from models.__init__ import storage
         amenities_dict = storage.all(Amenity)
-        amenity_instaces = []
+        amenity_instances = []
         for key, value in amenities_dict.items():
-            if value.id in amenity_ids:
+            if value.id in self.amenity_ids:
                 amenity_instances.append(value)
         return amenity_instances
 
