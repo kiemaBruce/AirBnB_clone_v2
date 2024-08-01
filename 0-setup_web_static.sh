@@ -34,6 +34,8 @@ ln --symbolic /data/web_static/releases/test/ /data/web_static/current
 # Give ownership of a directory to a specific user and group
 sudo chown -R ubuntu:ubuntu /data/
 rep_str=$(cat <<EOL
+        server_name _;
+
         location /hbnb_static {
 	        alias /data/web_static/current/;
         }
