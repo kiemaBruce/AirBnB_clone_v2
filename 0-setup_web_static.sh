@@ -4,8 +4,8 @@
 if ! command -v nginx &> /dev/null
 then
 	# Install Nginx
-	apt-get update -q
-	apt-get install -qy nginx
+	apt-get update
+	apt-get install -y nginx
 fi
 # Create directories if they don't exist
 mkdir /data/
