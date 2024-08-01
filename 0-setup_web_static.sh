@@ -24,7 +24,7 @@ html_content=$(cat <<EOL
 </html>
 EOL
 )
-echo "$html_content" | sudo tee /data/web_static/releases/test/index.html
+echo "$html_content" | sudo tee /data/web_static/releases/test/index.html > /dev/null
 # Create symbolic link
 if [ -L /data/web_static/current ]
 then
