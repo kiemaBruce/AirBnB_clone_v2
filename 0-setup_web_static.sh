@@ -30,7 +30,7 @@ if [ -L /data/web_static/current ]
 then
 	rm /data/web_static/current
 fi
-ln --symbolic /data/web_static/releases/test/ /data/web_static/current
+ln --symbolic /data/web_static/releases/test /data/web_static/current
 # Give ownership of a directory to a specific user and group
 sudo chown -R ubuntu:ubuntu /data/
 rep_str=$(cat <<EOL
