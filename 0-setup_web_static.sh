@@ -37,7 +37,7 @@ rep_str=$(cat <<EOL
         server_name _;
 
         location /hbnb_static {
-	        alias /data/web_static/current/;
+               alias /data/web_static/current/; 
         }
 EOL
 )
