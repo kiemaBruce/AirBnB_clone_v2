@@ -42,7 +42,7 @@ rep_str=$(cat <<EOL
 EOL
 )
 echo "$rep_str" > temp_file
-awk '/\tserver_name _;/ && !found {system("cat temp_file"); found=1; next} 1' /etc/nginx/sites-available/default > output_file
+awk '/server_name _;/ && !found {system("cat temp_file"); found=1; next} 1' /etc/nginx/sites-available/default > output_file
 rm temp_file
 mv output_file /etc/nginx/sites-available/default
 #check for any errors with nginx config files
