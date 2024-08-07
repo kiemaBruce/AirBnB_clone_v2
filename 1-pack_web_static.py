@@ -15,14 +15,14 @@ def do_pack():
     local('mkdir -p versions')
     now = datetime.now()
     archive_name = "web_static_"
-    archive_name = ("web_static_"
-                    + f"{now.year}"
-                    + f"{now.month}"
-                    + f"{now.day}"
-                    + f"{now.hour}"
-                    + f"{now.minute}"
-                    + f"{now.second}"
-                    + ".tgz"
+    archive_name = ("web_static_" +
+                    f"{now.year}" +
+                    f"{now.month}" +
+                    f"{now.day}" +
+                    f"{now.hour}" +
+                    f"{now.minute}" +
+                    f"{now.second}" +
+                    ".tgz"
                     )
     result = local(f'tar -zcvf ./versions/{archive_name} web_static')
     if result.succeeded:
