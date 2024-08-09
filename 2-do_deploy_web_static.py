@@ -2,6 +2,7 @@
 # Distributes an archive to web servers
 
 from fabric.api import *
+import os
 
 
 env.hosts = ['54.234.93.82', '52.91.150.83']
@@ -17,6 +18,8 @@ def do_deploy(archive_path):
         bool: True if all operations have been done correctly, otherwise
               returns False.
     """
+    if not os.path.exists(archive_path):
+        return False
     archive_name = archive_path.split(sep='/')[-1]
     remote_location = f"/tmp/{archive_name}"
     try:
