@@ -24,7 +24,8 @@ def do_pack():
                     f"{now.second}" +
                     ".tgz"
                     )
-    result = local(f'tar -zcvf ./versions/{archive_name} web_static')
+    archive_path = f"./versions/{archive_name}"
+    result = local(f'tar -zcvf {archive_path} web_static')
     if result.succeeded:
-        return archive_name
+        return archive_path
     return None
