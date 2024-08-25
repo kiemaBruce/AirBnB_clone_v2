@@ -28,9 +28,9 @@ def c_func(text):
     """
     # First replace all underscores with space
     my_str = text[:]
-    for index, char in enumerate(text):
+    for index, char in enumerate(my_str):
         if char == '_':
-            my_str = text[:index] + ' ' + text[index + 1:]
+            my_str = my_str[:index] + ' ' + text[index + 1:]
     return f'C {my_str}'
 
 
