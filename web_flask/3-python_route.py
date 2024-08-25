@@ -37,7 +37,7 @@ def python_func(text='is cool'):
     """Defines what happens when the /python/<text> directory is accesed.
     """
     my_str = text.replace('_', ' ')
-    return f'Python {text}'
+    return f'Python {my_str}'
 
 
 if __name__ == "__main__":
