@@ -27,6 +27,7 @@ def c_func(text):
     """Defines what happens when the /c/<text> directory is accessed.
     """
     # First replace all underscores with space
+    my_str = text[:]
     for index, char in enumerate(text):
         if char == '_':
             my_str = text[:index] + ' ' + text[index + 1:]
