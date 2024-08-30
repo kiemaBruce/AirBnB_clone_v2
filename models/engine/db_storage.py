@@ -79,7 +79,15 @@ class DBStorage:
 
     def save(self):
         """Commits all changes of the current database session"""
-        self.__session.commit()
+        try:
+            # Manually flush the session to synchronize all pending changes
+            self.__session.flush()
+            # Now, commit the session
+            self.__session.commit()
+        except SQLAlchemyError as e:
+            # Handle exceptions
+            self.__session.rollback()
+            print(f'Error saving data: {e}')
 
     def delete(self, obj=None):
         """ Deletes obj from the current database session if obj is not None
@@ -118,7 +126,7 @@ class DBStorage:
         from models.city import City
         from models.place import Place
         from models.review import Review
-        from models.place import association_table
+        from models.place import place_amenity
 
         """ Logging
         import logging
@@ -133,3 +141,7 @@ class DBStorage:
                                       )
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        """Removes the current session"""
+        self.__session.close()

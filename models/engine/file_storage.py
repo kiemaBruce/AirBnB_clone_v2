@@ -69,3 +69,7 @@ class FileStorage:
                 """del self.all()[key]"""
                 break
         del self.all()[key]
+
+    def close(self):
+        """Reloads the app state"""
+        self.reload()
