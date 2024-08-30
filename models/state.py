@@ -21,7 +21,7 @@ class State(BaseModel, Base):
             storage linked to the current State"""
             my_cities = []
             from models.city import City
-            from models.__init__ import storage
+            from models import storage
             for key, value in storage.all(City).items():
                 if value.state_id == self.id:
                     my_cities.append(value)

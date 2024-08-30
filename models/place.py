@@ -48,7 +48,7 @@ class Place(BaseModel, Base):
             """Returns a list of Amenity instances based on the attribute
             amenity_ids that contains all Amenity.id linked to the place"""
             from models.amenity import Amenity
-            from models.__init__ import storage
+            from models import storage
             amenities_dict = storage.all(Amenity)
             amenity_instances = []
             for key, value in amenities_dict.items():
@@ -76,7 +76,7 @@ class Place(BaseModel, Base):
             current Place.id"""
             my_reviews = []
             from models.places import Place
-            from models.__init__ import storage
+            from models import storage
             for key, value in storage.all(Review).items():
                 if value.place_id == self.id:
                     my_reviews.append(value)
