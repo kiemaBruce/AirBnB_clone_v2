@@ -38,20 +38,20 @@ class FileStorage:
         """Loads storage dictionary from file"""
         from models.base_model import BaseModel
         from models.user import User
-        from models.place import Place
         from models.state import State
         from models.city import City
         from models.amenity import Amenity
+        from models.place import Place
         from models.review import Review
 
         classes = {
-                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                    'BaseModel': BaseModel, 'User': User,
                     'State': State, 'City': City, 'Amenity': Amenity,
-                    'Review': Review
+                    'Review': Review, 'Place': Place
                   }
         try:
             temp = {}
-            with open(FileStorage.__file_path, 'r') as f:
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
                     self.all()[key] = classes[val['__class__']](**val)

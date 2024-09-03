@@ -4,9 +4,14 @@ import uuid
 from datetime import datetime
 from sqlalchemy import Column, DateTime, String
 from sqlalchemy.orm import declarative_base
+import os
 
+storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 
-Base = declarative_base()
+if storage_type == 'db':
+    Base = declarative_base()
+else:
+    Base = object
 
 
 class BaseModel:
