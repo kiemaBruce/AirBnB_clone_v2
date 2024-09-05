@@ -12,6 +12,10 @@ storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
+    __table_args__ = {
+            'mysql_charset': 'latin1'
+    }
+
     if storage_type == 'db':
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)

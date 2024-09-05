@@ -18,13 +18,17 @@ if storage_type == 'db':
                           Column('amenity_id', String(60),
                                  ForeignKey('amenities.id'),
                                  primary_key=True,
-                                 nullable=False)
+                                 nullable=False),
+                          mysql_charset='latin1'
                           )
 
 
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
+    __table_args__ = {
+            'mysql_charset': 'latin1'
+    }
 
     if storage_type == 'db':
         user_id = Column(String(60), ForeignKey('users.id',
