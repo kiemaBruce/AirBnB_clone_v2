@@ -12,9 +12,6 @@ storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 class Review(BaseModel, Base):
     """ Review classto store review information """
     __tablename__ = "reviews"
-    __table_args__ = {
-            'mysql_charset': 'latin1'
-    }
     if storage_type == 'db':
         text = Column(String(1024), nullable=False)
         place_id = Column(String(60), ForeignKey("places.id",
