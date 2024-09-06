@@ -15,8 +15,9 @@ app = Flask(__name__)
 def display_states():
     """Displays all States"""
     states_dict = storage.all(State)
-    sorted_dict = sorted(states_dict.items(), key=lambda item: item[1].name)
-    return render_template('7-states_list.html', states=states_dict)
+    sorted_dict = dict(sorted(states_dict.items(), key=lambda item:
+                       item[1].name))
+    return render_template('7-states_list.html', states=sorted_dict)
 
 
 @app.teardown_appcontext
