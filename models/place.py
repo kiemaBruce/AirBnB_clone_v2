@@ -25,6 +25,9 @@ if storage_type == 'db':
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
+    __table_args__ = {
+            'mysql_charset': 'latin1'
+    }
 
     if storage_type == 'db':
         user_id = Column(String(60), ForeignKey('users.id',
