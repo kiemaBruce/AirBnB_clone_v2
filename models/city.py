@@ -2,8 +2,8 @@
 """ City Module for HBNB project """
 from models.base_model import BaseModel, Base
 import os
-from sqlalchemy import Column, ForeignKey, String
-from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import relationship, mapped_column
 
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
@@ -17,10 +17,10 @@ class City(BaseModel, Base):
     }
 
     if storage_type == 'db':
-        name = Column(String(128), nullable=False)
-        state_id = Column(String(60),
-                          ForeignKey('states.id', ondelete='CASCADE'),
-                          nullable=False)
+        name = mapped_column(String(128), nullable=False)
+        state_id = mapped_column(String(60),
+                                 ForeignKey('states.id', ondelete='CASCADE'),
+                                 nullable=False)
         places = relationship("Place", back_populates="cities",
                               cascade="all, delete")
         # state = relationship('State', back_populates='cities')

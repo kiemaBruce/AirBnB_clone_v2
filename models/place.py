@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 import os
 from sqlalchemy import Column, Integer, Float, String, ForeignKey, Table
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, mapped_column
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE')
 
@@ -31,18 +31,23 @@ class Place(BaseModel, Base):
     }
 
     if storage_type == 'db':
-        user_id = Column(String(60), ForeignKey('users.id',
-                         ondelete='CASCADE'), nullable=False)
-        city_id = Column(String(60), ForeignKey('cities.id',
-                         ondelete='CASCADE'), nullable=False)
-        name = Column(String(128), nullable=False)
-        description = Column(String(1024), nullable=True, server_default=None)
-        number_rooms = Column(Integer, nullable=False, server_default="0")
-        number_bathrooms = Column(Integer, nullable=False, server_default="0")
-        max_guest = Column(Integer, nullable=False, server_default="0")
-        price_by_night = Column(Integer, nullable=False, server_default="0")
-        latitude = Column(Float, nullable=True)
-        longitude = Column(Float, nullable=True)
+        user_id = mapped_column(String(60), ForeignKey('users.id',
+                                ondelete='CASCADE'), nullable=False)
+        city_id = mapped_column(String(60), ForeignKey('cities.id',
+                                ondelete='CASCADE'), nullable=False)
+        name = mapped_column(String(128), nullable=False)
+        description = mapped_column(String(1024), nullable=True,
+                                    server_default=None)
+        number_rooms = mapped_column(Integer, nullable=False,
+                                     server_default="0")
+        number_bathrooms = mapped_column(Integer, nullable=False,
+                                         server_default="0")
+        max_guest = mapped_column(Integer, nullable=False,
+                                  server_default="0")
+        price_by_night = mapped_column(Integer, nullable=False,
+                                       server_default="0")
+        latitude = mapped_column(Float, nullable=True)
+        longitude = mapped_column(Float, nullable=True)
         user = relationship("User", back_populates="places")
         cities = relationship("City", back_populates="places")
         amenities = relationship("Amenity", secondary='place_amenity',
