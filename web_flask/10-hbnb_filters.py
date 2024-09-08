@@ -16,9 +16,9 @@ app = Flask(__name__)
 
 @app.route('/hbnb_filters', strict_slashes=False)
 def hbnb_filters():
-    """Displays all cities of a state"""
+    """Displays AirBnB clone filters"""
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
-    # a dict where the key is the state_name.id, and the
+    # a dict where the key is the state object, and the
     # value is a list of cities in that state
     cities_dict = {}
     # Get all State objects
@@ -35,10 +35,10 @@ def hbnb_filters():
     # Get all amenities
     amenities_dict = storage.all(Amenity)
     # Store amenity names in list, because that's all we need
-    amenitiy_names = []
+    amenity_names = []
     for amenity_obj in amenities_dict.values():
         amenity_names.append(amenity_obj.name)
-    return render_template('8-cities_by_states.html',
+    return render_template('10-hbnb_filters.html',
                            states_n_cities=cities_dict,
                            amenity_names=amenity_names)
 
